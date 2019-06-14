@@ -3,7 +3,6 @@ start=time.clock()
 #import xslha
 import sympy 
 
-print('读取完成')
 mh2=sympy.Symbol('mh2')		
 g1=sympy.Symbol('g1')		
 g2=sympy.Symbol('g2')		
