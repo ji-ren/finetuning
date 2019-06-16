@@ -74,9 +74,9 @@ def ZH_Finetuning(input_parameter):
         B3=-D1M*D2Z+D1Z*D2M
 
         #Ci=d(j)/d(tb)*d(k)/d(mz)-d(k)/d(tb)*d(j)/d(mz)
-        C1=-D2T*D3Z+D2Z*D3T
-        C2=-D3T*D1Z+D3Z*D1T
-        C3=-D1T*D2Z+D1Z*D2T
+        C1=-(-D2T*D3Z+D2Z*D3T)
+        C2=-(-D3T*D1Z+D3Z*D1T)
+        C3=-(-D1T*D2Z+D1Z*D2T)
 
         #Determinant of the linear system
         D=-(A1*D1Z+A2*D2Z+A3*D3Z)
