@@ -1,6 +1,6 @@
 import time
 start=time.clock()
-#import xslha
+import xslha
 import sympy 
 
 mh2=sympy.Symbol('mh2')		
@@ -52,6 +52,30 @@ V_yt=0.003        #spc.Value('YU',[3])
 #V_yt=2**0.5*V_mt/(sympy.sin(sympy.atan(V_TB))*246)
 #V_yt=V_mt/(sympy.sin(sympy.atan(V_TB))*174)
 # print('获取数值完成')
+
+# spc=xslha.read('/home/jxl/Desktop/finetuning/record/spectr.dat.0')
+# V_g1=spc.Value('GAUGE',[1])
+# V_g2=spc.Value('GAUGE',[2])
+# V_mt1=spc.Value('MASS',[1000006])
+# V_mt2=spc.Value('MASS',[2000006])
+# V_mt=spc.Value('SMINPUTS',[6])
+# V_At=spc.Value('EXTPAR',[11])
+# V_MHU2=spc.Value('MSOFT',[22])
+# V_MHD2=spc.Value('MSOFT',[21])
+# V_MS2=spc.Value('NMSSMRUN',[10])
+# V_TB=spc.Value('MINPAR',[3])
+# V_Mz=spc.Value('MASS',[23])
+# V_MU=spc.Value('NMSSMRUN',[5])
+# V_AL=spc.Value('NMSSMRUN',[3])
+# V_AK=spc.Value('NMSSMRUN',[4])
+# V_L=spc.Value('NMSSMRUN',[1])
+# V_K=spc.Value('NMSSMRUN',[2])
+# V_mh2=spc.Value('MASS',[25])**2
+# V_yt=2**0.5*V_mt/(sympy.sin(sympy.atan(V_TB))*246)
+# #V_yt=V_mt/(sympy.sin(sympy.atan(V_TB))*174)
+# # print('获取数值完成')
+
+
 #Dpi=Delta_pi
 DMHU2=sympy.Symbol('DMHU2')
 DMHD2=sympy.Symbol('DMHD2')
@@ -66,7 +90,7 @@ E1=MHU2+MU**2+L**2*2*Mz**2/(G*(1+TB2))+Mz**2*(TB2-1)/(2*(1+TB2))-MU/(TB*L)*(AL*L
 E2=MHD2+MU**2+L**2*2*Mz**2*TB2/(G*(1+TB2))+Mz**2*(1-TB2)/(2*(1+TB2))-MU*TB/L*(AL*L+MU*K)
 E3=MS2+K*AK*MU/L+2*K**2*MU**2/L**2+2*L**2*Mz**2/G-4*L*K*Mz**2*TB/(G*(1+TB2))-2*L**2*AL*Mz**2*TB/(MU*G*(1+TB2))
 #matrix elements square
-M11=Mz**2*TB2/(1+TB2)+MU/(TB*L)*(AL*L+MU*K)+Wt
+M11=Mz**2*TB2/(1+TB2)+MU/(TB*L)*(AL*L+MU*K)+2*Wt
 M22=Mz**2/(1+TB2)+MU*TB*(AL*L+MU*K)/L
 M33=2*Mz**2*TB*L**2*AL/(MU*G*(1+TB2))+MU*K/L**2*(AK*L+4*MU*K)
 M12=-MU/L*(AL*L+MU*K)+2*Mz**2*TB/(G*(1+TB2))*(2*L**2-G/2)
@@ -163,31 +187,31 @@ dfpi=dfMHU2+dfMHD2+dfMS2+dfAL+dfAK+dfL+dfK+dfyt
 
 V_dic={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt}
 # D_mh_FTi=pi/mh2*(dfMz*DMZi+dfTB*DTBi+dfMU*DMUi+dfpi)/dfmh2
-# print('正在计算D_mh Fine Tuning...')
-# mh_FT1=-MHU2/mh2*(dfMz*DMz1+dfTB*DTB1+dfMU*DMU1+dfpi)/dfmh2
-# mh_FT2=-MHD2/mh2*(dfMz*DMz2+dfTB*DTB2+dfMU*DMU2+dfpi)/dfmh2
-# mh_FT3=-MS2/mh2*(dfMz*DMz3+dfTB*DTB3+dfMU*DMU3+dfpi)/dfmh2
-# mh_FT4=-AL/mh2*(dfMz*DMz4+dfTB*DTB4+dfMU*DMU4+dfpi)/dfmh2
-# mh_FT5=-AK/mh2*(dfMz*DMz5+dfTB*DTB5+dfMU*DMU5+dfpi)/dfmh2
-# mh_FT6=-L/mh2*(dfMz*DMz6+dfTB*DTB6+dfMU*DMU6+dfpi)/dfmh2
-# mh_FT7=-K/mh2*(dfMz*DMz7+dfTB*DTB7+dfMU*DMU7+dfpi)/dfmh2
-# mh_FT8=-yt/mh2*(dfMz*DMz8+dfTB*DTB8+dfMU*DMU8+dfpi)/dfmh2
-# mh_V_FT1=mh_FT1.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
-# print('mh_FT1:',mh_V_FT1)
-# mh_V_FT2=mh_FT2.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
-# print('mh_FT2:',mh_V_FT2)
-# mh_V_FT3=mh_FT3.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
-# print('mh_FT3:',mh_V_FT3)
-# mh_V_FT4=mh_FT4.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
-# print('mh_FT4:',mh_V_FT4)
-# mh_V_FT5=mh_FT5.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
-# print('mh_FT5:',mh_V_FT5)
-# mh_V_FT6=mh_FT6.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
-# print('mh_FT6:',mh_V_FT6)
-# mh_V_FT7=mh_FT7.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
-# print('mh_FT7:',mh_V_FT7)
-# mh_V_FT8=mh_FT8.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
-# print('mh_FT8:',mh_V_FT8)
+print('正在计算D_mh Fine Tuning...')
+mh_FT1=-MHU2/mh2*(dfMz*DMz1+dfTB*DTB1+dfMU*DMU1+dfpi)/dfmh2
+mh_FT2=-MHD2/mh2*(dfMz*DMz2+dfTB*DTB2+dfMU*DMU2+dfpi)/dfmh2
+mh_FT3=-MS2/mh2*(dfMz*DMz3+dfTB*DTB3+dfMU*DMU3+dfpi)/dfmh2
+mh_FT4=-AL/mh2*(dfMz*DMz4+dfTB*DTB4+dfMU*DMU4+dfpi)/dfmh2
+mh_FT5=-AK/mh2*(dfMz*DMz5+dfTB*DTB5+dfMU*DMU5+dfpi)/dfmh2
+mh_FT6=-L/mh2*(dfMz*DMz6+dfTB*DTB6+dfMU*DMU6+dfpi)/dfmh2
+mh_FT7=-K/mh2*(dfMz*DMz7+dfTB*DTB7+dfMU*DMU7+dfpi)/dfmh2
+mh_FT8=-yt/mh2*(dfMz*DMz8+dfTB*DTB8+dfMU*DMU8+dfpi)/dfmh2
+mh_V_FT1=mh_FT1.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+print('mh_FT1:',mh_V_FT1)
+mh_V_FT2=mh_FT2.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+print('mh_FT2:',mh_V_FT2)
+mh_V_FT3=mh_FT3.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+print('mh_FT3:',mh_V_FT3)
+mh_V_FT4=mh_FT4.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+print('mh_FT4:',mh_V_FT4)
+mh_V_FT5=mh_FT5.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+print('mh_FT5:',mh_V_FT5)
+mh_V_FT6=mh_FT6.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+print('mh_FT6:',mh_V_FT6)
+mh_V_FT7=mh_FT7.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+print('mh_FT7:',mh_V_FT7)
+mh_V_FT8=mh_FT8.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+print('mh_FT8:',mh_V_FT8)
 
 # #D_Mz_FTi=pi/Mz*
 # Mz_FT1=MHU2/Mz*DMz1
@@ -258,57 +282,82 @@ V_dic={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2
 # print('dfyt:',dfyt.evalf(subs=V_dic))
 # print('dfpi:',dfpi.evalf(subs=V_dic))
 
-print('dM11Z:',sympy.diff(M11,Mz).evalf(subs=V_dic))
-print('dM22Z:',sympy.diff(M22,Mz).evalf(subs=V_dic))
-print('dM33Z:',sympy.diff(M33,Mz).evalf(subs=V_dic))
-print('dM12Z:',sympy.diff(M12,Mz).evalf(subs=V_dic))
-print('dM13Z:',sympy.diff(M13,Mz).evalf(subs=V_dic))
-print('dM23Z:',sympy.diff(M23,Mz).evalf(subs=V_dic))
-print('dM11TB:',sympy.diff(M11,TB).evalf(subs=V_dic))
-print('dM22TB:',sympy.diff(M22,TB).evalf(subs=V_dic))
-print('dM33TB:',sympy.diff(M33,TB).evalf(subs=V_dic))
-print('dM12TB:',sympy.diff(M12,TB).evalf(subs=V_dic))
-print('dM13TB:',sympy.diff(M13,TB).evalf(subs=V_dic))
-print('dM23TB:',sympy.diff(M23,TB).evalf(subs=V_dic))
-print('dM11MU:',sympy.diff(M11,MU).evalf(subs=V_dic))
-print('dM22MU:',sympy.diff(M22,MU).evalf(subs=V_dic))
-print('dM33MU:',sympy.diff(M33,MU).evalf(subs=V_dic))
-print('dM12MU:',sympy.diff(M12,MU).evalf(subs=V_dic))
-print('dM13MU:',sympy.diff(M13,MU).evalf(subs=V_dic))
-print('dM23MU:',sympy.diff(M23,MU).evalf(subs=V_dic))
-print('dM11L;',sympy.diff(M11,L).evalf(subs=V_dic))
-print('dM22L;',sympy.diff(M22,L).evalf(subs=V_dic))
-print('dM33L;',sympy.diff(M33,L).evalf(subs=V_dic))
-print('dM12L;',sympy.diff(M12,L).evalf(subs=V_dic))
-print('dM13L;',sympy.diff(M13,L).evalf(subs=V_dic))
-print('dM23L;',sympy.diff(M23,L).evalf(subs=V_dic))
-print('dM11K;',sympy.diff(M11,K).evalf(subs=V_dic))
-print('dM22K;',sympy.diff(M22,K).evalf(subs=V_dic))
-print('dM33K;',sympy.diff(M33,K).evalf(subs=V_dic))
-print('dM12K;',sympy.diff(M12,K).evalf(subs=V_dic))
-print('dM13K;',sympy.diff(M13,K).evalf(subs=V_dic))
-print('dM23K;',sympy.diff(M23,K).evalf(subs=V_dic))
-print('dM11AL:',sympy.diff(M11,AL).evalf(subs=V_dic))
-print('dM22AL:',sympy.diff(M22,AL).evalf(subs=V_dic))
-print('dM33AL:',sympy.diff(M33,AL).evalf(subs=V_dic))
-print('dM12AL:',sympy.diff(M12,AL).evalf(subs=V_dic))
-print('dM13AL:',sympy.diff(M13,AL).evalf(subs=V_dic))
-print('dM23AL:',sympy.diff(M23,AL).evalf(subs=V_dic))
-print('dM11AK:',sympy.diff(M11,AK).evalf(subs=V_dic))
-print('dM22AK:',sympy.diff(M22,AK).evalf(subs=V_dic))
-print('dM33AK:',sympy.diff(M33,AK).evalf(subs=V_dic))
-print('dM12AK:',sympy.diff(M12,AK).evalf(subs=V_dic))
-print('dM13AK:',sympy.diff(M13,AK).evalf(subs=V_dic))
-print('dM23AK:',sympy.diff(M23,AK).evalf(subs=V_dic))
-print('dM11yt:',sympy.diff(M11,yt).evalf(subs=V_dic))
-print('dM22yt:',sympy.diff(M22,yt).evalf(subs=V_dic))
-print('dM33yt:',sympy.diff(M33,yt).evalf(subs=V_dic))
-print('dM12yt:',sympy.diff(M12,yt).evalf(subs=V_dic))
-print('dM13yt:',sympy.diff(M13,yt).evalf(subs=V_dic))
-print('dM23yt:',sympy.diff(M23,yt).evalf(subs=V_dic))
+# print('dM11Z:',sympy.diff(M11,Mz).evalf(subs=V_dic))
+# print('dM22Z:',sympy.diff(M22,Mz).evalf(subs=V_dic))
+# print('dM33Z:',sympy.diff(M33,Mz).evalf(subs=V_dic))
+# print('dM12Z:',sympy.diff(M12,Mz).evalf(subs=V_dic))
+# print('dM13Z:',sympy.diff(M13,Mz).evalf(subs=V_dic))
+# print('dM23Z:',sympy.diff(M23,Mz).evalf(subs=V_dic))
+# print('dM11TB:',sympy.diff(M11,TB).evalf(subs=V_dic))
+# print('dM22TB:',sympy.diff(M22,TB).evalf(subs=V_dic))
+# print('dM33TB:',sympy.diff(M33,TB).evalf(subs=V_dic))
+# print('dM12TB:',sympy.diff(M12,TB).evalf(subs=V_dic))
+# print('dM13TB:',sympy.diff(M13,TB).evalf(subs=V_dic))
+# print('dM23TB:',sympy.diff(M23,TB).evalf(subs=V_dic))
+# print('dM11MU:',sympy.diff(M11,MU).evalf(subs=V_dic))
+# print('dM22MU:',sympy.diff(M22,MU).evalf(subs=V_dic))
+# print('dM33MU:',sympy.diff(M33,MU).evalf(subs=V_dic))
+# print('dM12MU:',sympy.diff(M12,MU).evalf(subs=V_dic))
+# print('dM13MU:',sympy.diff(M13,MU).evalf(subs=V_dic))
+# print('dM23MU:',sympy.diff(M23,MU).evalf(subs=V_dic))
+# print('dM11L;',sympy.diff(M11,L).evalf(subs=V_dic))
+# print('dM22L;',sympy.diff(M22,L).evalf(subs=V_dic))
+# print('dM33L;',sympy.diff(M33,L).evalf(subs=V_dic))
+# print('dM12L;',sympy.diff(M12,L).evalf(subs=V_dic))
+# print('dM13L;',sympy.diff(M13,L).evalf(subs=V_dic))
+# print('dM23L;',sympy.diff(M23,L).evalf(subs=V_dic))
+# print('dM11K;',sympy.diff(M11,K).evalf(subs=V_dic))
+# print('dM22K;',sympy.diff(M22,K).evalf(subs=V_dic))
+# print('dM33K;',sympy.diff(M33,K).evalf(subs=V_dic))
+# print('dM12K;',sympy.diff(M12,K).evalf(subs=V_dic))
+# print('dM13K;',sympy.diff(M13,K).evalf(subs=V_dic))
+# print('dM23K;',sympy.diff(M23,K).evalf(subs=V_dic))
+# print('dM11AL:',sympy.diff(M11,AL).evalf(subs=V_dic))
+# print('dM22AL:',sympy.diff(M22,AL).evalf(subs=V_dic))
+# print('dM33AL:',sympy.diff(M33,AL).evalf(subs=V_dic))
+# print('dM12AL:',sympy.diff(M12,AL).evalf(subs=V_dic))
+# print('dM13AL:',sympy.diff(M13,AL).evalf(subs=V_dic))
+# print('dM23AL:',sympy.diff(M23,AL).evalf(subs=V_dic))
+# print('dM11AK:',sympy.diff(M11,AK).evalf(subs=V_dic))
+# print('dM22AK:',sympy.diff(M22,AK).evalf(subs=V_dic))
+# print('dM33AK:',sympy.diff(M33,AK).evalf(subs=V_dic))
+# print('dM12AK:',sympy.diff(M12,AK).evalf(subs=V_dic))
+# print('dM13AK:',sympy.diff(M13,AK).evalf(subs=V_dic))
+# print('dM23AK:',sympy.diff(M23,AK).evalf(subs=V_dic))
+# print('dM11yt:',sympy.diff(M11,yt).evalf(subs=V_dic))
+# print('dM22yt:',sympy.diff(M22,yt).evalf(subs=V_dic))
+# print('dM33yt:',sympy.diff(M33,yt).evalf(subs=V_dic))
+# print('dM12yt:',sympy.diff(M12,yt).evalf(subs=V_dic))
+# print('dM13yt:',sympy.diff(M13,yt).evalf(subs=V_dic))
+# print('dM23yt:',sympy.diff(M23,yt).evalf(subs=V_dic))
 
 
+# f1=(mh2)**2*(M11+M22+M33)
+# f2=-(mh2)*(M11*M22+M11*M33+M22*M33-M12*M21-M13*M31-M23*M32)
+# f3=M11*M22*M33+M12*M23*M31+M13*M21*M32-M22*M13*M31-M12*M21*M33-M23*M32*M11
 
+# df1Mz=sympy.diff(f1,Mz)
+# df2Mz=sympy.diff(f2,Mz)
+# df3Mz=sympy.diff(f3,Mz)
+
+# print('df1Mz:',df1Mz.evalf(subs=V_dic))
+# print('df2Mz:',df2Mz.evalf(subs=V_dic))
+# print('df3Mz:',df3Mz.evalf(subs=V_dic))
+
+# f31=M11*M22*M33
+# f32=M12*M23*M31+M13*M21*M32
+# f33=-M22*M13*M31-M12*M21*M33-M23*M32*M11
+
+# df31Mz=sympy.diff(f31,Mz)
+# df32Mz=sympy.diff(f32,Mz)
+# df33Mz=sympy.diff(f33,Mz)
+
+# print('df31Mz:',df31Mz.evalf(subs=V_dic))
+# print('df32Mz:',df32Mz.evalf(subs=V_dic))
+# print('df33Mz:',df33Mz.evalf(subs=V_dic))
+
+# df3_Mz=df31Mz+df32Mz+df33Mz
+# print('df3_Mz:',df3_Mz.evalf(subs=V_dic))
 
 print('计算完毕')
 end=time.clock()
