@@ -161,62 +161,62 @@ dfpi=dfMHU2+dfMHD2+dfMS2+dfAL+dfAK+dfL+dfK+dfyt
 print('d(f/(Mz,TB,MU,mh2,pi)) 计算完成')
 
 #D_mh_FTi=pi/mh2*(dfMz*DMZi+dfTB*DTBi+dfMU*DMUi+dfpi)/dfmh2
-print('正在计算D_mh Fine Tuning...')
-mh_FT1=-MHU2/mh2*(dfMz*DMz1+dfTB*DTB1+dfMU*DMU1+dfpi)/dfmh2
-mh_FT2=-MHD2/mh2*(dfMz*DMz2+dfTB*DTB2+dfMU*DMU2+dfpi)/dfmh2
-mh_FT3=-MS2/mh2*(dfMz*DMz3+dfTB*DTB3+dfMU*DMU3+dfpi)/dfmh2
-mh_FT4=-AL/mh2*(dfMz*DMz4+dfTB*DTB4+dfMU*DMU4+dfpi)/dfmh2
-mh_FT5=-AK/mh2*(dfMz*DMz5+dfTB*DTB5+dfMU*DMU5+dfpi)/dfmh2
-mh_FT6=-L/mh2*(dfMz*DMz6+dfTB*DTB6+dfMU*DMU6+dfpi)/dfmh2
-mh_FT7=-K/mh2*(dfMz*DMz7+dfTB*DTB7+dfMU*DMU7+dfpi)/dfmh2
-mh_FT8=-yt/mh2*(dfMz*DMz8+dfTB*DTB8+dfMU*DMU8+dfpi)/dfmh2
-mh_V_FT1=mh_FT1.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
-print('mh_FT1:',mh_V_FT1)
-mh_V_FT2=mh_FT2.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
-print('mh_FT2:',mh_V_FT2)
-mh_V_FT3=mh_FT3.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
-print('mh_FT3:',mh_V_FT3)
-mh_V_FT4=mh_FT4.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
-print('mh_FT4:',mh_V_FT4)
-mh_V_FT5=mh_FT5.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
-print('mh_FT5:',mh_V_FT5)
-mh_V_FT6=mh_FT6.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
-print('mh_FT6:',mh_V_FT6)
-mh_V_FT7=mh_FT7.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
-print('mh_FT7:',mh_V_FT7)
-mh_V_FT8=mh_FT8.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
-print('mh_FT8:',mh_V_FT8)
+# print('正在计算D_mh Fine Tuning...')
+# mh_FT1=-MHU2/mh2*(dfMz*DMz1+dfTB*DTB1+dfMU*DMU1+dfpi)/dfmh2
+# mh_FT2=-MHD2/mh2*(dfMz*DMz2+dfTB*DTB2+dfMU*DMU2+dfpi)/dfmh2
+# mh_FT3=-MS2/mh2*(dfMz*DMz3+dfTB*DTB3+dfMU*DMU3+dfpi)/dfmh2
+# mh_FT4=-AL/mh2*(dfMz*DMz4+dfTB*DTB4+dfMU*DMU4+dfpi)/dfmh2
+# mh_FT5=-AK/mh2*(dfMz*DMz5+dfTB*DTB5+dfMU*DMU5+dfpi)/dfmh2
+# mh_FT6=-L/mh2*(dfMz*DMz6+dfTB*DTB6+dfMU*DMU6+dfpi)/dfmh2
+# mh_FT7=-K/mh2*(dfMz*DMz7+dfTB*DTB7+dfMU*DMU7+dfpi)/dfmh2
+# mh_FT8=-yt/mh2*(dfMz*DMz8+dfTB*DTB8+dfMU*DMU8+dfpi)/dfmh2
+# mh_V_FT1=mh_FT1.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+# print('mh_FT1:',mh_V_FT1)
+# mh_V_FT2=mh_FT2.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+# print('mh_FT2:',mh_V_FT2)
+# mh_V_FT3=mh_FT3.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+# print('mh_FT3:',mh_V_FT3)
+# mh_V_FT4=mh_FT4.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+# print('mh_FT4:',mh_V_FT4)
+# mh_V_FT5=mh_FT5.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+# print('mh_FT5:',mh_V_FT5)
+# mh_V_FT6=mh_FT6.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+# print('mh_FT6:',mh_V_FT6)
+# mh_V_FT7=mh_FT7.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+# print('mh_FT7:',mh_V_FT7)
+# mh_V_FT8=mh_FT8.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+# print('mh_FT8:',mh_V_FT8)
 
-#D_Mz_FTi=pi/Mz*
-Mz_FT1=MHU2/Mz*sympy.diff(DMz,DMHU2)
+# #D_Mz_FTi=pi/Mz*
+Mz_FT1=MHU2/Mz*DMz1
 Mz_V_FT1=Mz_FT1.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
 print('Mz_FT1:',Mz_V_FT1)
 
-Mz_FT2=MHD2/Mz*sympy.diff(DMz,DMHD2)
+Mz_FT2=MHD2/Mz*DMz2
 Mz_V_FT2=Mz_FT2.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
 print('Mz_FT2:',Mz_V_FT2)
 
-Mz_FT3=MS2/Mz*sympy.diff(DMz,DMS2)
+Mz_FT3=MS2/Mz*DMz3
 Mz_V_FT3=Mz_FT3.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
 print('Mz_FT3:',Mz_V_FT3)
 
-Mz_FT4=AL/Mz*sympy.diff(DMz,DAL)
+Mz_FT4=AL/Mz*DMz4
 Mz_V_FT4=Mz_FT4.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
 print('Mz_FT4:',Mz_V_FT4)
 
-Mz_FT5=AK/Mz*sympy.diff(DMz,DAK)
+Mz_FT5=AK/Mz*DMz5
 Mz_V_FT5=Mz_FT5.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
 print('Mz_FT5:',Mz_V_FT5)
 
-Mz_FT6=L/Mz*sympy.diff(DMz,DL)
+Mz_FT6=L/Mz*DMz6
 Mz_V_FT6=Mz_FT6.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
 print('Mz_FT6:',Mz_V_FT6)
 
-Mz_FT7=K/Mz*sympy.diff(DMz,DK)
+Mz_FT7=K/Mz*DMz7
 Mz_V_FT7=Mz_FT7.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
 print('Mz_FT7:',Mz_V_FT7)
 
-Mz_FT8=yt/Mz*sympy.diff(DMz,Dyt)
+Mz_FT8=yt/Mz*DMz8
 Mz_V_FT8=Mz_FT8.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
 print('Mz_FT8:',Mz_V_FT8)
 
