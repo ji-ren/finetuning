@@ -2,7 +2,7 @@
 This program is used to calculate EWFT finetuning.  
 It based on the NMSSM model.  
 dir:`finetuning/Electroweak_Finetuning`  
-&#160;&#160;./EWFT_NMSSM.py:Run this file to calculate numerical results.  
+&#8195;&#8195;&#8195;./EWFT_NMSSM.py:Run this file to calculate numerical results.  
                   Need /ewft_DzDh.dat and /output.temp.  
   ./EWFT_Out.dat:The numerical result  
   ./ewft.ini:The parameter configuration file  
