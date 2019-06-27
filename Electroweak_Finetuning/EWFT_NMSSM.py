@@ -178,6 +178,7 @@ class EWFT_NMSSM():
             temp = temp.replace('>>>akappa<<<', '{:>12}'.format("{:.5e}".format(self.info['akappa'])))
             temp = temp.replace('>>>lambda<<<', '{:>12}'.format("{:.5e}".format(self.info['lambda'])))
             temp = temp.replace('>>>>kappa<<<', '{:>12}'.format("{:.5e}".format(self.info['kappa'])))
+            temp = temp.replace('>>>>>yt<<<<<', '{:>12}'.format("{:.5e}".format(self.eva['parameter']['yt'])))
             output = "{}\n{}\n".format(output, temp)
             for it in self.eva['fti'].keys():
                 output = "{}{}\t{}\n".format(output, it, self.eva['fti'][it])
