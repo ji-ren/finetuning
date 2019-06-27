@@ -5,6 +5,7 @@ start=time.clock()
 import xslha
 import sympy 
 import json
+import os, sys
 
 mh2=sympy.Symbol('mh2')		
 g1=sympy.Symbol('g1')		
@@ -198,10 +199,11 @@ ewft_parsing = {
     'FTDh_Akappa':  str(mh_FT5),
     'FTDh_lambda':  str(mh_FT6),
     'FTDh_kappa':   str(mh_FT7),
-    'FTDh_ytop':    str(mh_FT8),
+    'FTDh_ytop':    str(mh_FT8)
 }
 
-with open('ewft_DzDh.dat', 'w') as f1:
+
+with open('{}/ewft_DzDh.dat'.format(os.path.abspath(os.path.dirname(__file__))), 'w') as f1:
     json.dump(ewft_parsing, f1)
 
 print('计算完毕')
