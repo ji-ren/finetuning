@@ -20,13 +20,14 @@ C=At**2/(mt1**2-mt2**2)**2*(1-(mt1**2+mt2**2)/(mt1**2-mt2**2)*sympy.log(mt1/mt2)
 TB=sympy.Symbol('TB')
 TB2=TB**2
 Mz=sympy.Symbol('Mz')
+Mz2=sympy.Symbol('Mz2')
 MU=sympy.Symbol('MU')
 AL=sympy.Symbol('AL')
 AK=sympy.Symbol('AK')
 L=sympy.Symbol('L')	
 K=sympy.Symbol('K')	
 yt=sympy.Symbol('yt')
-origin=3*yt**4/(8*(sympy.pi)**2)*2*Mz**2*TB2/(G*(1+TB2))
+origin=3*yt**4/(8*(sympy.pi)**2)*2*Mz2*TB2/(G*(1+TB2))
 #Wt=origin*sympy.log(mt1**2/mt2**2)
 Wt=origin*(A+B*(At+MU/TB)+C*(At+MU/TB)**2)
 # print('导入参数完成')
@@ -44,6 +45,7 @@ V_MHD2=float(3.45021908E+06)     #spc.Value('MSOFT',[21])
 V_MS2=float(1.79817995E+04)      #spc.Value('NMSSMRUN',[10])
 V_TB=float(1.14531792E+01)    #spc.Value('MINPAR',[3])
 V_Mz=float(9.11887000E+01)    #spc.Value('MASS',[23])
+V_Mz2=float(9.11887000E+01)**2    #spc.Value('MASS',[23])
 V_MU=300.0     #spc.Value('NMSSMRUN',[5])
 V_AL=2000.0    #spc.Value('NMSSMRUN',[3])
 V_AK=200.0   #spc.Value('NMSSMRUN',[4])
@@ -87,14 +89,14 @@ DL=sympy.Symbol('DL')
 DK=sympy.Symbol('DK')
 Dyt=sympy.Symbol('Dyt')
 #minimisation equation
-E1=MHU2+MU**2+L**2*2*Mz**2/(G*(1+TB2))+Mz**2*(TB2-1)/(2*(1+TB2))-MU/(TB*L)*(AL*L+MU*K)+Wt
-E2=MHD2+MU**2+L**2*2*Mz**2*TB2/(G*(1+TB2))+Mz**2*(1-TB2)/(2*(1+TB2))-MU*TB/L*(AL*L+MU*K)
-E3=MS2+K*AK*MU/L+2*K**2*MU**2/L**2+2*L**2*Mz**2/G-4*L*K*Mz**2*TB/(G*(1+TB2))-2*L**2*AL*Mz**2*TB/(MU*G*(1+TB2))
+E1=MHU2+MU**2+L**2*2*Mz2/(G*(1+TB2))+Mz2*(TB2-1)/(2*(1+TB2))-MU/(TB*L)*(AL*L+MU*K)+Wt
+E2=MHD2+MU**2+L**2*2*Mz2*TB2/(G*(1+TB2))+Mz2*(1-TB2)/(2*(1+TB2))-MU*TB/L*(AL*L+MU*K)
+E3=MS2+K*AK*MU/L+2*K**2*MU**2/L**2+2*L**2*Mz2/G-4*L*K*Mz2*TB/(G*(1+TB2))-2*L**2*AL*Mz2*TB/(MU*G*(1+TB2))
 #matrix elements square
-M11=Mz**2*TB2/(1+TB2)+MU/(TB*L)*(AL*L+MU*K)+2*Wt
-M22=Mz**2/(1+TB2)+MU*TB*(AL*L+MU*K)/L
-M33=2*Mz**2*TB*L**2*AL/(MU*G*(1+TB2))+MU*K/L**2*(AK*L+4*MU*K)
-M12=-MU/L*(AL*L+MU*K)+2*Mz**2*TB/(G*(1+TB2))*(2*L**2-G/2)
+M11=Mz2*TB2/(1+TB2)+MU/(TB*L)*(AL*L+MU*K)+2*Wt
+M22=Mz2/(1+TB2)+MU*TB*(AL*L+MU*K)/L
+M33=2*Mz2*TB*L**2*AL/(MU*G*(1+TB2))+MU*K/L**2*(AK*L+4*MU*K)
+M12=-MU/L*(AL*L+MU*K)+2*Mz2*TB/(G*(1+TB2))*(2*L**2-G/2)
 M21=M12
 M13=Mz*(2*L*MU*TB-(AL*L+2*MU*K))*sympy.root(2/(G*(1+TB2)),2)
 M31=M13
@@ -106,13 +108,13 @@ f=-(mh2)**3+(mh2)**2*(M11+M22+M33)-(mh2)*(M11*M22+M11*M33+M22*M33-M12*M21-M13*M3
 # print('质量平方矩阵对角化完成')
 
 #Coefficient matrix
-A11=sympy.diff(E1,Mz)
+A11=sympy.diff(E1,Mz2)
 A12=sympy.diff(E1,TB)
 A13=sympy.diff(E1,MU)
-A21=sympy.diff(E2,Mz)
+A21=sympy.diff(E2,Mz2)
 A22=sympy.diff(E2,TB)
 A23=sympy.diff(E2,MU)
-A31=sympy.diff(E3,Mz)
+A31=sympy.diff(E3,Mz2)
 A32=sympy.diff(E3,TB)
 A33=sympy.diff(E3,MU)
 #Augmented matrix term
@@ -186,7 +188,7 @@ dfyt=sympy.diff(f,yt)
 dfpi=dfMHU2+dfMHD2+dfMS2+dfAL+dfAK+dfL+dfK+dfyt
 # print('d(f/(Mz,TB,MU,mh2,pi)) 计算完成')
 
-V_dic={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt}
+V_dic={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt,Mz2:V_Mz2}
 # D_mh_FTi=pi/mh2*(dfMz*DMZi+dfTB*DTBi+dfMU*DMUi+dfpi)/dfmh2
 # print('正在计算D_mh Fine Tuning...')
 # mh_FT1=-MHU2/mh2*(dfMz*DMz1+dfTB*DTB1+dfMU*DMU1+dfpi)/dfmh2
@@ -215,37 +217,36 @@ V_dic={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2
 # print('mh_FT8:',mh_V_FT8)
 
 # #D_Mz_FTi=pi/Mz*
-Mz_FT1=MHU2/Mz*DMz1
-print(Mz_FT1)
+Mz_FT1=MHU2/Mz2*DMz1
 Mz_V_FT1=Mz_FT1.evalf(subs=V_dic)
 print('Mz_FT1:',Mz_V_FT1)
 
-Mz_FT2=MHD2/Mz*DMz2
-Mz_V_FT2=Mz_FT2.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+Mz_FT2=MHD2/Mz2*DMz2
+Mz_V_FT2=Mz_FT2.evalf(subs=V_dic)
 print('Mz_FT2:',Mz_V_FT2)
 
-Mz_FT3=MS2/Mz*DMz3
-Mz_V_FT3=Mz_FT3.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+Mz_FT3=MS2/Mz2*DMz3
+Mz_V_FT3=Mz_FT3.evalf(subs=V_dic)
 print('Mz_FT3:',Mz_V_FT3)
 
-Mz_FT4=AL/Mz*DMz4
-Mz_V_FT4=Mz_FT4.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+Mz_FT4=AL/Mz2*DMz4
+Mz_V_FT4=Mz_FT4.evalf(subs=V_dic)
 print('Mz_FT4:',Mz_V_FT4)
 
-Mz_FT5=AK/Mz*DMz5
-Mz_V_FT5=Mz_FT5.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+Mz_FT5=AK/Mz2*DMz5
+Mz_V_FT5=Mz_FT5.evalf(subs=V_dic)
 print('Mz_FT5:',Mz_V_FT5)
 
-Mz_FT6=L/Mz*DMz6
-Mz_V_FT6=Mz_FT6.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+Mz_FT6=L/Mz2*DMz6
+Mz_V_FT6=Mz_FT6.evalf(subs=V_dic)
 print('Mz_FT6:',Mz_V_FT6)
 
-Mz_FT7=K/Mz*DMz7
-Mz_V_FT7=Mz_FT7.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+Mz_FT7=K/Mz2*DMz7
+Mz_V_FT7=Mz_FT7.evalf(subs=V_dic)
 print('Mz_FT7:',Mz_V_FT7)
 
-Mz_FT8=yt/Mz*DMz8
-Mz_V_FT8=Mz_FT8.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+Mz_FT8=yt/Mz2*DMz8
+Mz_V_FT8=Mz_FT8.evalf(subs=V_dic)
 print('Mz_FT8:',Mz_V_FT8)
 
 # print('DTB1:',DTB1.evalf(subs=V_dic))

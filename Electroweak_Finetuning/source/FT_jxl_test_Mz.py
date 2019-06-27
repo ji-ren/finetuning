@@ -1,12 +1,15 @@
+#!/usr/bin/env python3
+
 import time
 start=time.clock()
 import xslha
 import sympy 
+import json
 
 mh2=sympy.Symbol('mh2')		
 g1=sympy.Symbol('g1')		
 g2=sympy.Symbol('g2')		
-G=g1**2+g2**2
+G=sympy.Symbol('G')
 mt1=sympy.Symbol('mt1')		
 mt2=sympy.Symbol('mt2')		
 mt=sympy.Symbol('mt')		
@@ -14,9 +17,6 @@ At=sympy.Symbol('At')
 MHU2=sympy.Symbol('MHU2')	
 MHD2=sympy.Symbol('MHD2')	
 MS2=sympy.Symbol('MS2')		
-A=sympy.log(mt1*mt2/mt**2)
-B=At/(mt1**2-mt2**2)*sympy.log(mt1**2/mt2**2)
-C=At**2/(mt1**2-mt2**2)**2*(1-(mt1**2+mt2**2)/(mt1**2-mt2**2)*sympy.log(mt1/mt2))
 TB=sympy.Symbol('TB')
 TB2=TB**2
 Mz=sympy.Symbol('Mz')
@@ -26,31 +26,37 @@ AK=sympy.Symbol('AK')
 L=sympy.Symbol('L')	
 K=sympy.Symbol('K')	
 yt=sympy.Symbol('yt')
+A=sympy.log(mt1*mt2/mt**2)
+B=At/(mt1**2-mt2**2)*sympy.log(mt1**2/mt2**2)
+C=At**2/(mt1**2-mt2**2)**2*(1-(mt1**2+mt2**2)/(mt1**2-mt2**2)*sympy.log(mt1/mt2))
 origin=3*yt**4/(8*(sympy.pi)**2)*2*Mz**2*TB2/(G*(1+TB2))
 #Wt=origin*sympy.log(mt1**2/mt2**2)
 Wt=origin*(A+B*(At+MU/TB)+C*(At+MU/TB)**2)
+# Wt=sympy.Symbol('Wt')
 # print('导入参数完成')
 
 # #获得数值
 V_mh2=15703.778547419524
-V_g1=float(3.61496259E-01)   #spc.Value('GAUGE',[1])
-V_g2=float(6.71344778E-01)   #spc.Value('GAUGE',[2])
-V_mt1=float(2.01037642E+03)   #spc.Value('MASS',[1000006])
-V_mt2=float(2.12820584E+03)   #spc.Value('MASS',[2000006])
-V_mt=float(1.73500000E+02)    #spc.Value('SMINPUTS',[6])
-V_At=2000.0    #spc.Value('EXTPAR',[11])
-V_MHU2=float(-3.40835683E+05)     #spc.Value('MSOFT',[22])
-V_MHD2=float(3.45021908E+06)     #spc.Value('MSOFT',[21])
-V_MS2=float(1.79817995E+04)      #spc.Value('NMSSMRUN',[10])
-V_TB=float(1.14531792E+01)    #spc.Value('MINPAR',[3])
-V_Mz=float(9.11887000E+01)    #spc.Value('MASS',[23])
-V_MU=300.0     #spc.Value('NMSSMRUN',[5])
-V_AL=2000.0    #spc.Value('NMSSMRUN',[3])
-V_AK=200.0   #spc.Value('NMSSMRUN',[4])
-V_L=float(2.28888827E-01)    #spc.Value('NMSSMRUN',[1])
-V_K=float(-1.39604166E-01)   #spc.Value('NMSSMRUN',[2])
-V_yt=0       #spc.Value('YU',[3])
-#V_yt=2**0.5*V_mt/(sympy.sin(sympy.atan(V_TB))*246)
+V_g1=0.26311327550439290
+V_g2=0
+V_G=0.26311327550439290
+V_mt1=0.0000001
+V_mt2=0.0000001
+V_mt=0.0000001
+V_At=0.0000001
+V_MHU2=-103284371.27507243
+V_MHD2=1068282696.5019275
+V_MS2=-47627080.359709434
+V_TB=15.000000000000000
+V_Mz=91.186999999999998
+V_MU=10000.000000000000
+V_AL=2205.7791717411660
+V_AK=-474.58393299065267
+V_L=2.0000000000000002E-005
+V_K=1.0000000000000001E-005
+V_yt=0
+# V_Wt=-0.54397085922542865
+# V_yt=2**0.5*V_mt/(sympy.sin(sympy.atan(V_TB))*246)
 #V_yt=V_mt/(sympy.sin(sympy.atan(V_TB))*174)
 # print('获取数值完成')
 
@@ -186,7 +192,8 @@ dfyt=sympy.diff(f,yt)
 dfpi=dfMHU2+dfMHD2+dfMS2+dfAL+dfAK+dfL+dfK+dfyt
 # print('d(f/(Mz,TB,MU,mh2,pi)) 计算完成')
 
-V_dic={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt}
+V_dic={mh2: V_mh2,
+       G:V_G,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt}
 # D_mh_FTi=pi/mh2*(dfMz*DMZi+dfTB*DTBi+dfMU*DMUi+dfpi)/dfmh2
 # print('正在计算D_mh Fine Tuning...')
 # mh_FT1=-MHU2/mh2*(dfMz*DMz1+dfTB*DTB1+dfMU*DMU1+dfpi)/dfmh2
@@ -215,38 +222,51 @@ V_dic={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2
 # print('mh_FT8:',mh_V_FT8)
 
 # #D_Mz_FTi=pi/Mz*
-Mz_FT1=MHU2/Mz*DMz1
-print(Mz_FT1)
+Mz_FT1=2*MHU2/Mz*DMz1
 Mz_V_FT1=Mz_FT1.evalf(subs=V_dic)
 print('Mz_FT1:',Mz_V_FT1)
 
-Mz_FT2=MHD2/Mz*DMz2
-Mz_V_FT2=Mz_FT2.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+Mz_FT2=2*MHD2/Mz*DMz2
+Mz_V_FT2=Mz_FT2.evalf(subs=V_dic)
 print('Mz_FT2:',Mz_V_FT2)
 
-Mz_FT3=MS2/Mz*DMz3
-Mz_V_FT3=Mz_FT3.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+Mz_FT3=2*MS2/Mz*DMz3
+Mz_V_FT3=Mz_FT3.evalf(subs=V_dic)
 print('Mz_FT3:',Mz_V_FT3)
 
 Mz_FT4=AL/Mz*DMz4
-Mz_V_FT4=Mz_FT4.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+Mz_V_FT4=Mz_FT4.evalf(subs=V_dic)
 print('Mz_FT4:',Mz_V_FT4)
 
 Mz_FT5=AK/Mz*DMz5
-Mz_V_FT5=Mz_FT5.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+Mz_V_FT5=Mz_FT5.evalf(subs=V_dic)
 print('Mz_FT5:',Mz_V_FT5)
 
 Mz_FT6=L/Mz*DMz6
-Mz_V_FT6=Mz_FT6.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+Mz_V_FT6=Mz_FT6.evalf(subs=V_dic)
 print('Mz_FT6:',Mz_V_FT6)
 
 Mz_FT7=K/Mz*DMz7
-Mz_V_FT7=Mz_FT7.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+Mz_V_FT7=Mz_FT7.evalf(subs=V_dic)
 print('Mz_FT7:',Mz_V_FT7)
 
 Mz_FT8=yt/Mz*DMz8
-Mz_V_FT8=Mz_FT8.evalf(subs={mh2:V_mh2,g1:V_g1,g2:V_g2,mt1:V_mt1,mt2:V_mt2,mt:V_mt,At:V_At,MHU2:V_MHU2,MHD2:V_MHD2,MS2:V_MS2,TB:V_TB,Mz:V_Mz,MU:V_MU,AL:V_AL,AK:V_AK,L:V_L,K:V_K,yt:V_yt})
+Mz_V_FT8=Mz_FT8.evalf(subs=V_dic)
 print('Mz_FT8:',Mz_V_FT8)
+
+ewft_parsing = {
+    'FTDz_mHu2':    str(Mz_FT1),
+    'FTDz_mHd2':    str(Mz_FT2),
+    'FTDz_mHs2':    str(Mz_FT3),
+    'FTDz_Alambda': str(Mz_FT4),
+    'FTDz_Akappa':  str(Mz_FT5),
+    'FTDz_lambda':  str(Mz_FT6),
+    'FTDz_kappa':   str(Mz_FT7),
+    'FTDz_ytop':    str(Mz_FT8),
+}
+
+with open('ewft_DzDh.dat', 'w') as f1:
+    json.dump(ewft_parsing, f1)
 
 # print('DTB1:',DTB1.evalf(subs=V_dic))
 # print('DTB2:',DTB2.evalf(subs=V_dic))
