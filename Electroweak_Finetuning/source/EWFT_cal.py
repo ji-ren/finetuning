@@ -165,21 +165,21 @@ Mz_FT8=yt/Mz*DMz8
 print(Mz_FT8)
 
 # D_mh_FTi=pi/mh2*(dfMz*DMZi+dfTB*DTBi+dfMU*DMUi+dfpi)/dfmh2
-mh_FT1=MHU2/mh2*(dfMz*DMz1+dfTB*DTB1+dfMU*DMU1+dfpi)/dfmh2
+mh_FT1=MHU2/mh2*(dfMz*DMz1+dfTB*DTB1+dfMU*DMU1+dfMHU2)/dfmh2
 print(mh_FT1)
-mh_FT2=MHD2/mh2*(dfMz*DMz2+dfTB*DTB2+dfMU*DMU2+dfpi)/dfmh2
+mh_FT2=MHD2/mh2*(dfMz*DMz2+dfTB*DTB2+dfMU*DMU2+dfMHD2)/dfmh2
 print(mh_FT2)
-mh_FT3=MS2/mh2*(dfMz*DMz3+dfTB*DTB3+dfMU*DMU3+dfpi)/dfmh2
+mh_FT3=MS2/mh2*(dfMz*DMz3+dfTB*DTB3+dfMU*DMU3+dfMS2)/dfmh2
 print(mh_FT3)
-mh_FT4=AL/mh2*(dfMz*DMz4+dfTB*DTB4+dfMU*DMU4+dfpi)/dfmh2
+mh_FT4=AL/mh2*(dfMz*DMz4+dfTB*DTB4+dfMU*DMU4+dfAL)/dfmh2
 print(mh_FT4)
-mh_FT5=AK/mh2*(dfMz*DMz5+dfTB*DTB5+dfMU*DMU5+dfpi)/dfmh2
+mh_FT5=AK/mh2*(dfMz*DMz5+dfTB*DTB5+dfMU*DMU5+dfAK)/dfmh2
 print(mh_FT5)
-mh_FT6=L/mh2*(dfMz*DMz6+dfTB*DTB6+dfMU*DMU6+dfpi)/dfmh2
+mh_FT6=L/mh2*(dfMz*DMz6+dfTB*DTB6+dfMU*DMU6+dfK)/dfmh2
 print(mh_FT6)
 mh_FT7=K/mh2*(dfMz*DMz7+dfTB*DTB7+dfMU*DMU7+dfpi)/dfmh2
 print(mh_FT7)
-mh_FT8=yt/mh2*(dfMz*DMz8+dfTB*DTB8+dfMU*DMU8+dfpi)/dfmh2
+mh_FT8=yt/mh2*(dfMz*DMz8+dfTB*DTB8+dfMU*DMU8+dfyt)/dfmh2
 print(mh_FT8)
 
 
